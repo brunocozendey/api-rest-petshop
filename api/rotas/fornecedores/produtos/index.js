@@ -3,7 +3,7 @@ const Tabela = require('./TabelaProduto')
 const Produto = require('./Produtos')
 const Serializador = require('../../../Serializador').SerializadorProduto
 
-roteador.options('/', (req,res)=> {
+router.options('/', (req,res) => {
     res.set('Access-Control-Allow-Methods', 'GET, POST')
     res.set('Access-Control-Allow-Headers', 'Content-Type')
     res.status(204)
@@ -44,6 +44,12 @@ router.post('/', async (req,res, proximo) => {
     }
 })
 
+router.options('/:id', (req,res)=> {
+    res.set('Access-Control-Allow-Methods', 'DELETE, GET, HEAD, PUT')
+    res.set('Access-Control-Allow-Headers', 'Content-Type')
+    res.status(204)
+    res.end()
+})
 
 router.delete('/:id', async (req,res) => {
     const dados = {
@@ -118,6 +124,13 @@ router.put('/:id', async(req,res,proximo)=>{
     } catch(erro){
         proximo(erro)
     }
+})
+
+router.options('/:id/doiminuir-estoque', (req,res)=> {
+    res.set('Access-Control-Allow-Methods', 'POST')
+    res.set('Access-Control-Allow-Headers', 'Content-Type')
+    res.status(204)
+    res.end()
 })
 
 router.post('/:id/diminuir-estoque', async(req,res, proximo)=>{

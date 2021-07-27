@@ -33,8 +33,11 @@ app.use((req,res,proximo)=>{
     proximo()
 })
 
-const roteador = require('./rotas/fornecedores')
-app.use('/api/fornecedores', roteador)
+const router = require('./rotas/fornecedores')
+app.use('/api/fornecedores', router)
+
+const routerV2 = require('./rotas/fornecedores/rotas.v2')
+app.use('/api/v2/fornecedores', routerV2)
 
 app.use((erro, requisicao, resposta, proximo) => {
     let status = 500
